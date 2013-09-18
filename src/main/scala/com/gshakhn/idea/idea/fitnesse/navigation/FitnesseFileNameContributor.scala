@@ -17,6 +17,7 @@ class FitnesseFileNameContributor extends ChooseByNameContributor {
   def getItemsByName(name: String, pattern: String, project: Project, includeNonProjectItems: Boolean) = {
     getFitnesseFiles(includeNonProjectItems, project)
       .filter(_.getParent.getName.equalsIgnoreCase(name))
+      .filter(!_.getParent.getPath.contains("/ErrorLogs/"))
       .map(PsiManager.getInstance(project).findFile(_)).toArray
   }
 
